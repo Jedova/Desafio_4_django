@@ -1,0 +1,9 @@
+{% extends "web/base.html" %}
+{% block content %}
+  {% if nombre %}
+    <h2 class="mb-3">Bienvenido {{ nombre }}</h2>
+  {% else %}
+    <h2 class="mb-3">Bienvenido cliente</h2>
+  {% endif %}
+  <a class="btn btn-outline-secondary btn-sm" href="{% url 'welcome' %}?nombre=Julio%20Ovalle">Probar con nombre</a>
+{% endblock %}

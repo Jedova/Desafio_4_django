@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ContactFormForm
+from .forms import ContactFormModelForm
 from .models import ContactForm, Flan
 from django.contrib import messages
 
@@ -25,17 +25,12 @@ def welcome(request):
 
 def contact(request):
     if request.method == "POST":
-        form = ContactFormForm(request.POST)
+        form = ContactFormModelForm(request.POST)
         if form.is_valid():
-            ContactForm.objects.create(
-                customer_email=form.cleaned_data["customer_email"],
-                customer_name=form.cleaned_data["customer_name"],
-                message=form.cleaned_data["message"],
-            )
-            messages.success(request, "Gracias, recibimos tu mensaje.")
+            form.save()  
             return redirect("success")
     else:
-        form = ContactFormForm()
+        form = ContactFormModelForm()
     return render(request, "web/contact.html", {"form": form})
 
 def success(request):

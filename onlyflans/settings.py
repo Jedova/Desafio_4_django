@@ -25,8 +25,25 @@ SECRET_KEY = "django-insecure-66-a+wyvbi#-clo!odc$$(#gv9+h%ly#ve@sfb53zymhkk!urs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    ".app.github.dev",          
+]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",
+    "https://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://127.0.0.1:8000",
+    "https://*.app.github.dev",  
+]
+
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Application definition
 

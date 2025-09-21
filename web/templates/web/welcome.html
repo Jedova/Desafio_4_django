@@ -5,5 +5,21 @@
   {% else %}
     <h2 class="mb-3">Bienvenido cliente</h2>
   {% endif %}
-  <a class="btn btn-outline-secondary btn-sm" href="{% url 'welcome' %}?nombre=Julio%20Ovalle">Probar con nombre</a>
+
+  <h3 class="mb-3">Flanes privados</h3>
+  <div class="row g-3">
+    {% for f in flanes %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ f.image_url }}" class="card-img-top" alt="{{ f.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ f.name }}</h5>
+            <p class="card-text">{{ f.description|truncatechars:120 }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">No hay flanes privados todavía.</p>
+    {% endfor %}
+  </div>
 {% endblock %}

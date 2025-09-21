@@ -1,12 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import ContactFormForm
+from .models import ContactForm, Flan
+from django.contrib import messages
 
 def index(request):
-    productos = [
-        {"nombre": "Flan de vainilla",  "precio": 2500, "img": "web/img/flan_vainilla.jpeg"},
-        {"nombre": "Flan de chocolate", "precio": 2800, "img": "web/img/flan_chocolate.jpeg"},
-        {"nombre": "Flan vegano",       "precio": 3000, "img": "web/img/flan_vegano.jpeg"},
-    ]
-    return render(request, "web/index.html", {"productos": productos})
+    
+    flanes_publicos = Flan.objects.filter(is_private=False).order_by("name")
+    return render(request, "web/index.html", {"flanes": flanes_publicos})
 
 def about(request):
     datos = {
@@ -18,5 +18,25 @@ def about(request):
     return render(request, "web/about.html", datos)
 
 def welcome(request):
+    
+    flanes_privados = Flan.objects.filter(is_private=True).order_by("name")
     nombre = request.GET.get("nombre")
-    return render(request, "web/welcome.html", {"nombre": nombre})
+    return render(request, "web/welcome.html", {"nombre": nombre, "flanes": flanes_privados})
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactFormForm(request.POST)
+        if form.is_valid():
+            ContactForm.objects.create(
+                customer_email=form.cleaned_data["customer_email"],
+                customer_name=form.cleaned_data["customer_name"],
+                message=form.cleaned_data["message"],
+            )
+            messages.success(request, "Gracias, recibimos tu mensaje.")
+            return redirect("success")
+    else:
+        form = ContactFormForm()
+    return render(request, "web/contact.html", {"form": form})
+
+def success(request):
+    return render(request, "web/success.html")

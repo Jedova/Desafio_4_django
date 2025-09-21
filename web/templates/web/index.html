@@ -1,19 +1,19 @@
 {% extends "web/base.html" %}
-{% load static %}
 {% block content %}
-  <h2 class="mb-4">Productos</h2>
+  <h2 class="mb-4">Flanes públicos</h2>
   <div class="row g-3">
-    {% for p in productos %}
+    {% for f in flanes %}
       <div class="col-12 col-sm-6 col-lg-4">
         <div class="card h-100 shadow-sm">
-          <img src="{% static p.img %}" class="card-img-top" alt="{{ p.nombre }}">
+          <img src="{{ f.image_url }}" class="card-img-top" alt="{{ f.name }}">
           <div class="card-body">
-            <h5 class="card-title">{{ p.nombre }}</h5>
-            <p class="card-text">$ {{ p.precio }}</p>
-            <a class="btn btn-primary btn-sm" href="#">Comprar</a>
+            <h5 class="card-title">{{ f.name }}</h5>
+            <p class="card-text">{{ f.description|truncatechars:120 }}</p>
           </div>
         </div>
       </div>
+    {% empty %}
+      <p class="text-muted">No hay flanes públicos todavía.</p>
     {% endfor %}
   </div>
 {% endblock %}

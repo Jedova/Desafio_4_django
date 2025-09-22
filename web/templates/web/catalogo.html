@@ -1,0 +1,35 @@
+{% extends "web/base.html" %}
+{% block content %}
+  <h2 class="mb-3">Catálogo</h2>
+  <p class="text-muted">Públicos: {{ total_publicos }} · Privados: {{ total_privados }}</p>
+
+  <div class="row g-3">
+    <div class="col-12 col-lg-6">
+      <div class="card h-100">
+        <div class="card-header bg-success-subtle">Flanes públicos</div>
+        <ul class="list-group list-group-flush">
+          {% for f in publicos %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ f.name }}</span>
+              {% if f.price %}<span class="text-muted">$ {{ f.price }}</span>{% endif %}
+            </li>
+          {% empty %}<li class="list-group-item">Sin elementos</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card h-100">
+        <div class="card-header bg-warning-subtle">Flanes privados</div>
+        <ul class="list-group list-group-flush">
+          {% for f in privados %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ f.name }}</span>
+              {% if f.price %}<span class="text-muted">$ {{ f.price }}</span>{% endif %}
+            </li>
+          {% empty %}<li class="list-group-item">Sin elementos</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

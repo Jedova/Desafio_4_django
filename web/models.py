@@ -6,6 +6,7 @@ class Flan(models.Model):
     name        = models.CharField(max_length=64)
     description = models.TextField()
     image_url   = models.URLField()
+    price       = models.DecimalField(max_digits=8, decimal_places=0, default=0)
     slug        = models.SlugField()
     is_private  = models.BooleanField(default=False)
 

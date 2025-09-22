@@ -3,7 +3,7 @@ from .models import Flan, ContactForm
 
 @admin.register(Flan)
 class FlanAdmin(admin.ModelAdmin):
-    list_display  = ("name", "slug", "is_private")
+    list_display  = ("name", "slug", "is_private", "price")
     list_filter   = ("is_private",)
     search_fields = ("name", "slug")
     prepopulated_fields = {"slug": ("name",)} 

@@ -7,11 +7,28 @@
     </button>
 
     <div class="collapse navbar-collapse" id="nav">
+      {# web/templates/web/_navbar.html #}
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contacto</a></li>  
-        <li class="nav-item"><a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a></li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a></li>
+          {# web/templates/web/_navbar.html #}
+          <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post" class="m-0 p-0 d-inline">
+              {% csrf_token %}
+              <button type="submit"
+                      class="nav-link btn btn-link border-0 bg-transparent px-3 py-2 text-decoration-none">
+                Cerrar sesión
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>

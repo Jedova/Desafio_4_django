@@ -26,11 +26,7 @@ SECRET_KEY = "django-insecure-66-a+wyvbi#-clo!odc$$(#gv9+h%ly#ve@sfb53zymhkk!urs
 DEBUG = True
 
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    ".app.github.dev",          
-]
+ALLOWED_HOSTS = ["127.0.0.1","localhost",".app.github.dev"]
 
 
 CSRF_TRUSTED_ORIGINS = [
@@ -40,7 +36,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://127.0.0.1:8000",
     "https://*.app.github.dev",  
 ]
-
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -138,3 +133,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "welcome"
+LOGOUT_REDIRECT_URL = "index"
